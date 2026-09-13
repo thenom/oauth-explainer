@@ -1,0 +1,126 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 1.5rem 1.75rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Flow Overview Banner */
+.flow-hero-banner {
+  background: linear-gradient(135deg, rgba(23, 32, 54, 0.7), rgba(17, 24, 40, 0.9));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.flow-hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.flow-hero-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.flow-standard-rfc {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.flow-hero-desc {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  max-width: 900px;
+  line-height: 1.45;
+}
+
+.flow-hero-provider-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.provider-select {
+  background: transparent;
+  color: var(--text-primary);
+  border: none;
+  font-size: 0.82rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.provider-select option {
+  background-color: var(--bg-surface);
+  color: #fff;
+}
+
+/* Flow Content Grid */
+.flow-workspace-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.deprecated-warning-banner {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.35);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fecdd3;
+  font-size: 0.88rem;
+}
+
+/* Footer */
+.app-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  background: var(--bg-darkest);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.app-footer a {
+  color: var(--color-user);
+  text-decoration: underline;
+}
+
+@media (max-width: 960px) {
+  .flow-hero-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

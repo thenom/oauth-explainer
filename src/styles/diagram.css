@@ -1,0 +1,229 @@
+.diagram-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 1.5rem;
+}
+
+.diagram-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.75rem;
+}
+
+.diagram-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.diagram-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.channel-tag-banner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.actors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.actor-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.actor-card.is-sender {
+  border-color: var(--actor-color);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+  background: rgba(23, 32, 54, 0.95);
+  transform: translateY(-2px);
+}
+
+.actor-card.is-receiver {
+  border-color: var(--actor-color);
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.2);
+  background: rgba(23, 32, 54, 0.95);
+  transform: translateY(-2px);
+}
+
+.actor-card.is-idle {
+  opacity: 0.55;
+  filter: grayscale(20%);
+}
+
+.actor-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--actor-color);
+  transition: all 0.3s ease;
+}
+
+.actor-card.is-sender .actor-icon-box,
+.actor-card.is-receiver .actor-icon-box {
+  background: var(--actor-color-bg, rgba(255, 255, 255, 0.1));
+  border-color: var(--actor-color);
+  transform: scale(1.08);
+}
+
+.actor-name {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.actor-role {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.2;
+}
+
+.actor-status-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  margin-top: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.actor-card.is-sender .actor-status-badge {
+  background: rgba(52, 211, 153, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+}
+
+.actor-card.is-receiver .actor-status-badge {
+  background: rgba(167, 139, 250, 0.15);
+  color: #a78bfa;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+}
+
+.actor-card.is-idle .actor-status-badge {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+}
+
+/* Connection Highway and Traveling Packet */
+.packet-highway {
+  margin-top: 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.highway-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.82rem;
+}
+
+.route-descriptor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.route-arrow {
+  color: var(--text-muted);
+}
+
+.channel-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* SVG Line & Packet Track */
+.track-svg-container {
+  width: 100%;
+  height: 54px;
+  position: relative;
+}
+
+.packet-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.track-line {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 3;
+  stroke-dasharray: 6 6;
+}
+
+.track-line-active {
+  stroke-width: 3;
+  transition: all 0.3s ease;
+}
+
+.packet-node {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.packet-circle {
+  filter: drop-shadow(0 0 8px currentColor);
+  animation: packetPulse 2s infinite;
+}
+
+.packet-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  fill: #fff;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+@media (max-width: 860px) {
+  .actors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
