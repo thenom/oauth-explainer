@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Search, BookOpen, ExternalLink } from 'lucide-react';
+import { X, Search, BookOpen } from 'lucide-react';
 import { GLOSSARY_TERMS } from '../data/glossary.js';
 import '../styles/modals.css';
 
@@ -29,14 +29,18 @@ export function GlossaryModal({ isOpen, onClose }) {
         </div>
 
         <div className="modal-body">
-          <input
-            type="text"
-            className="glossary-search-input"
-            placeholder="Search terminology, RFC sections, or roles (e.g. PKCE, Bearer, State, Scope)..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            autoFocus
-          />
+          <div style={{ position: 'relative', marginBottom: '1.25rem' }}>
+            <Search size={18} color="#64748b" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+            <input
+              type="text"
+              className="glossary-search-input"
+              style={{ paddingLeft: '42px' }}
+              placeholder="Search terminology, RFC sections, or roles (e.g. PKCE, Bearer, State, Scope)..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              autoFocus
+            />
+          </div>
 
           <div className="glossary-grid">
             {filtered.map((item, idx) => (

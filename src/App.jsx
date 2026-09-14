@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ALL_FLOWS, FLOWS_MAP, PROVIDER_PRESETS } from './data/flows/index.js';
+import { adaptStepForPreset } from './data/flows/presetAdapter.js';
 import { Header } from './components/Header.jsx';
 import { FlowControls } from './components/FlowControls.jsx';
 import { FlowDiagram } from './components/FlowDiagram.jsx';
@@ -7,7 +8,8 @@ import { StepExplainer } from './components/StepExplainer.jsx';
 import { HttpInspector } from './components/HttpInspector.jsx';
 import { ParameterSandbox } from './components/ParameterSandbox.jsx';
 import { GlossaryModal } from './components/GlossaryModal.jsx';
-import { AlertTriangle, Building2, ExternalLink } from 'lucide-react';
+import { FlowDecisionModal } from './components/FlowDecisionModal.jsx';
+import { AlertTriangle, Building2 } from 'lucide-react';
 import './App.css';
 
 export function App() {
@@ -18,10 +20,13 @@ export function App() {
   const [selectedPresetId, setSelectedPresetId] = useState('generic');
   const [isGlossaryOpen, setIsGlossaryOpen] = useState(false);
   const [isSandboxOpen, setIsSandboxOpen] = useState(false);
+  const [isDecisionModalOpen, setIsDecisionModalOpen] = useState(false);
 
   const currentFlow = FLOWS_MAP[selectedFlowId] || ALL_FLOWS[0];
-  const steps = currentFlow.steps || [];
-  const currentStep = steps[currentStepIndex] || steps[0];
+  const rawSteps = currentFlow.steps || [];
+  const adaptedSteps = rawSteps.map(s => adaptStepForPreset(s, selectedPresetId));
+  const adaptedFlow = { ...currentFlow, steps: adaptedSteps };
+  const currentStep = adaptedSteps[currentStepIndex] || adaptedSteps[0];
 
   // Switch flow handler
   const handleSelectFlow = useCallback((flowId) => {
@@ -32,10 +37,10 @@ export function App() {
 
   // Step navigation
   const handleStepChange = useCallback((newIndex) => {
-    if (newIndex >= 0 && newIndex < steps.length) {
+    if (newIndex >= 0 && newIndex < adaptedSteps.length) {
       setCurrentStepIndex(newIndex);
     }
-  }, [steps.length]);
+  }, [adaptedSteps.length]);
 
   // Reset flow
   const handleReset = useCallback(() => {
@@ -50,7 +55,7 @@ export function App() {
     const intervalTime = 4500 / playbackSpeed;
     const timer = setInterval(() => {
       setCurrentStepIndex((prevIndex) => {
-        if (prevIndex >= steps.length - 1) {
+        if (prevIndex >= adaptedSteps.length - 1) {
           setIsAutoPlaying(false);
           return prevIndex;
         }
@@ -59,12 +64,12 @@ export function App() {
     }, intervalTime);
 
     return () => clearInterval(timer);
-  }, [isAutoPlaying, playbackSpeed, steps.length]);
+  }, [isAutoPlaying, playbackSpeed, adaptedSteps.length]);
 
   // Keyboard navigation (Left/Right arrows, Space for play/pause)
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (isGlossaryOpen || isSandboxOpen) return;
+      if (isGlossaryOpen || isSandboxOpen || isDecisionModalOpen) return;
 
       if (e.key === 'ArrowRight') {
         handleStepChange(currentStepIndex + 1);
@@ -78,7 +83,7 @@ export function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentStepIndex, handleStepChange, isGlossaryOpen, isSandboxOpen]);
+  }, [currentStepIndex, handleStepChange, isGlossaryOpen, isSandboxOpen, isDecisionModalOpen]);
 
   return (
     <div className="app-layout">
@@ -87,9 +92,7 @@ export function App() {
         flows={ALL_FLOWS}
         selectedFlowId={selectedFlowId}
         onSelectFlow={handleSelectFlow}
-        presets={PROVIDER_PRESETS}
-        selectedPresetId={selectedPresetId}
-        onSelectPreset={setSelectedPresetId}
+        onOpenDecisionWizard={() => setIsDecisionModalOpen(true)}
         onOpenGlossary={() => setIsGlossaryOpen(true)}
         onOpenSandbox={() => setIsSandboxOpen(true)}
         onReset={handleReset}
@@ -137,7 +140,7 @@ export function App() {
 
       {/* Stepper Bar and Playback Controls */}
       <FlowControls
-        flow={currentFlow}
+        flow={adaptedFlow}
         currentStepIndex={currentStepIndex}
         onStepChange={handleStepChange}
         isAutoPlaying={isAutoPlaying}
@@ -159,7 +162,7 @@ export function App() {
 
         {/* 1. Multi-Actor Process Flow Diagram with Animated Traveling Packet */}
         <FlowDiagram
-          flow={currentFlow}
+          flow={adaptedFlow}
           currentStepIndex={currentStepIndex}
         />
 
@@ -178,6 +181,13 @@ export function App() {
       <ParameterSandbox
         isOpen={isSandboxOpen}
         onClose={() => setIsSandboxOpen(false)}
+      />
+
+      {/* Flow Decision Wizard Modal */}
+      <FlowDecisionModal
+        isOpen={isDecisionModalOpen}
+        onClose={() => setIsDecisionModalOpen(false)}
+        onSelectFlow={handleSelectFlow}
       />
 
       {/* RFC Glossary Modal */}

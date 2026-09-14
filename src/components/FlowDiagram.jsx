@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { 
   User, 
   Laptop, 
@@ -7,12 +7,11 @@ import {
   Tv, 
   Smartphone, 
   Database, 
-  AlertTriangle,
-  ArrowRight,
-  Send,
-  Radio,
-  Lock,
-  Globe
+  AlertTriangle, 
+  ArrowRight, 
+  Radio, 
+  Lock, 
+  Globe 
 } from 'lucide-react';
 import '../styles/diagram.css';
 

@@ -246,3 +246,23 @@
   text-transform: uppercase;
   margin-bottom: 4px;
 }
+
+.jwt-custom-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.65rem 0.85rem;
+  outline: none;
+  resize: vertical;
+  line-height: 1.45;
+  transition: border-color 0.2s;
+}
+
+.jwt-custom-input:focus {
+  border-color: var(--color-auth);
+}
+

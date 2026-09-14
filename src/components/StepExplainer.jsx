@@ -5,12 +5,11 @@ import {
   ShieldAlert, 
   ShieldCheck, 
   Key, 
-  Layers,
-  HelpCircle
+  Layers
 } from 'lucide-react';
 import '../styles/explainer.css';
 
-export function StepExplainer({ step, onParameterClick }) {
+export function StepExplainer({ step }) {
   if (!step) return null;
 
   const getSecurityIcon = (type) => {

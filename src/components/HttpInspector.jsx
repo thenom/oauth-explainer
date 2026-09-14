@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { 
-  Code, 
   Send, 
   CornerDownRight, 
   Terminal, 
   Copy, 
   Check, 
-  KeyRound,
-  FileCode
+  KeyRound
 } from 'lucide-react';
 import { TokenInspector } from './TokenInspector.jsx';
 import '../styles/inspector.css';

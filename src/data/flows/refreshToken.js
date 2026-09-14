@@ -47,7 +47,7 @@ export const REFRESH_TOKEN_FLOW = {
       ],
       underTheHood: `Short Access Token Lifetimes are deliberate!
 Access tokens usually live for only 15 to 60 minutes.
-This limits the damage if an access token is intercepted or leaked: the attacker\'s window of access closes rapidly without requiring complex distributed revocation lists.`,
+This limits the damage if an access token is intercepted or leaked: the attacker's window of access closes rapidly without requiring complex distributed revocation lists.`,
       securitySpotlight: {
         type: 'info',
         title: 'Why Access Tokens Expire Quickly',

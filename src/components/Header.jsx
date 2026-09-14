@@ -1,20 +1,16 @@
 import React from 'react';
-import { Shield, BookOpen, AlertOctagon, RotateCcw, Sparkles } from 'lucide-react';
+import { Shield, BookOpen, AlertOctagon, RotateCcw, Sparkles, HelpCircle } from 'lucide-react';
 import '../styles/header.css';
 
 export function Header({
   flows,
   selectedFlowId,
   onSelectFlow,
-  presets,
-  selectedPresetId,
-  onSelectPreset,
+  onOpenDecisionWizard,
   onOpenGlossary,
   onOpenSandbox,
   onReset
 }) {
-  const currentFlow = flows.find(f => f.id === selectedFlowId) || flows[0];
-
   return (
     <header className="app-header">
       <div className="brand-section">
@@ -52,6 +48,16 @@ export function Header({
       </div>
 
       <div className="header-actions">
+        <button
+          className="btn-header"
+          onClick={onOpenDecisionWizard}
+          title="Interactive wizard to choose the right OAuth flow for your architecture"
+          style={{ borderColor: 'rgba(56, 189, 248, 0.3)', color: '#38bdf8' }}
+        >
+          <HelpCircle size={15} />
+          Flow Decision Guide
+        </button>
+
         <button
           className="btn-header btn-tamper"
           onClick={onOpenSandbox}

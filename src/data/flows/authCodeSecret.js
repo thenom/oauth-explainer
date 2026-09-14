@@ -244,7 +244,7 @@ The backend creates a normal HTTP-only session cookie for the browser.`,
         'Backend sends HTTP 302 to user browser: Set-Cookie: session_token=...; HttpOnly; Secure; SameSite=Lax.',
         'User browser loads dashboard: "Welcome back, Bob!"'
       ],
-      underTheHood: `The end user\'s browser only ever deals with a regular first-party session cookie.
+      underTheHood: `The end user's browser only ever deals with a regular first-party session cookie.
 All OAuth tokens remain securely insulated on the backend server.`,
       securitySpotlight: {
         type: 'info',
